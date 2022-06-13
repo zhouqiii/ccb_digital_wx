@@ -1,0 +1,40 @@
+<view class="platform">
+  <view class="plat_tab">
+    <van-tabs swipeable>
+      <van-tab title="敏捷研发">
+        <view class="tab_time">
+          <text>年月区间</text>
+          <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' />
+          <text>-</text>
+          <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' />
+        </view>
+      </van-tab>
+      <van-tab title="持续交付">
+        <view class="tab_time">
+          <text>年月区间</text>
+          <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' />
+          <text>-</text>
+          <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' />
+        </view></van-tab>
+    </van-tabs>
+  </view>
+</view>
+
+<van-popup show='{{ popStart }}' position="bottom">
+  <van-datetime-picker
+    value='{{ popCurrentStart }}'
+    type="year-month"
+    formatter="{{ formatter }}"
+    bind:cancel="onCancelStartDate"
+    bind:confirm="onConfirmStartDate"
+  />
+</van-popup>
+<van-popup show='{{ popEnd }}' position="bottom">
+  <van-datetime-picker
+    value='{{ popCurrentEnd }}'
+    type="year-month"
+    formatter="{{ formatter }}"
+    bind:cancel="onCancelEndDate"
+    bind:confirm="onConfirmEndDate"
+  />
+</van-popup>

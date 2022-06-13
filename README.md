@@ -1,2 +1,9 @@
-# ccb_digital_wx
-原生小程序开发--主要是数据可视化功能
+##
+
+###
+
+>
+### 1.
+![weChart-map](https://www.baidu.com)
+>  更多实例请搜索微信小程序
+
