@@ -1,21 +1,52 @@
 <view class="platform">
   <view class="plat_tab">
-    <van-tabs swipeable>
+    <van-tabs sticky bind:change="onChange">
       <van-tab title="敏捷研发">
         <view class="tab_time">
-          <text>年月区间</text>
+          <text class="time_text">年月区间</text>
           <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' />
           <text>-</text>
           <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' />
         </view>
+        <view>
+          <text>一、敏捷交付能力1</text>
+          <view>
+            <chart-bar></chart-bar>
+          </view>
+          <view>
+            <chart-line></chart-line>
+          </view>
+        </view>
+        <view>
+          <text>二、敏捷交付速率</text>
+          <view>
+            <chart-pie></chart-pie>
+          </view>
+          <view>
+            <chart-table></chart-table>
+          </view>
+        </view>
       </van-tab>
       <van-tab title="持续交付">
         <view class="tab_time">
-          <text>年月区间</text>
+          <text class="time_text">年月区间</text>
           <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' />
           <text>-</text>
           <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' />
-        </view></van-tab>
+        </view>
+        <view wx:if="{{isLoaded}}">
+          <text>一、流水线执行效率</text>
+          <view>
+            <chart-pie></chart-pie>
+          </view>
+        </view>
+        <view>
+          <text>二、工具链效率分析</text>
+          <view>
+            <chart-table></chart-table>
+          </view>
+        </view>
+      </van-tab>
     </van-tabs>
   </view>
 </view>

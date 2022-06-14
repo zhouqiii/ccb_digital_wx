@@ -10,6 +10,7 @@ Page({
     popCurrentEnd: new Date().getTime(),
     startDate: '',
     endDate: '',
+    isLoaded: false,
     formatter(type, val) {
       if (type === 'year') {
         return `${val}年`;
@@ -81,6 +82,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onChange(event) {
+    if(event.detail.name === 1) {
+      this.setData({
+        isLoaded: true,
+      });
+    }
   },
   formatDate(val) {
     // 格式化有效期时间为2021年02月的格式

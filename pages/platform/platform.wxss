@@ -3,3 +3,10 @@
   height: 100%;
   width: 100%;
 }
+.tab_time{
+  display: flex;
+  flex-direction: row;
+}
+.time_text{
+  min-width: 100px;
+}

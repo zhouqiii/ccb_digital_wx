@@ -1,2 +1,8 @@
 {
+  "usingComponents": {
+    "chart-bar": "../../components/bar/index",
+    "chart-line": "../../components/line/index",
+    "chart-pie": "../../components/pie/index",
+    "chart-table": "../../components/table/index"
+  }
 }
