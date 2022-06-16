@@ -2,6 +2,7 @@ import * as echarts from '../../miniprogram_npm/ec-canvas/echarts';
 
 let chart = null;
 const payData = [18, 25, 10, 32, 15, 38];
+const demandData = [[20,30,11,32,4,42],[32,15,28,48,2,21],[46,32,11,12,14,49],[12,42,27,31,19,4]]
 function getInterval() {
   const len = payData.length
   const k = len%6
@@ -22,13 +23,18 @@ function initChart(canvas, width, height, dpr) {
 
   var option = {
     title: {
-      text: '业务功能交付效率',
+      text: '需求各阶段·时长',
       textStyle: {
         fontSize: 14,
         fontWeight: 'normal',
         color: '#333333',
       },
       left: 'center'
+    },
+    legend: {
+      orient: 'horizontal',
+      left: 'center',
+      bottom: '0'
     },
     itemStyle: {
       color: '#0098e1'
@@ -47,9 +53,6 @@ function initChart(canvas, width, height, dpr) {
           color: '#a6a6a6'
         }
       },
-      // formatter(params) {
-      //   return `<div>${params[0].name}: ${params[0].value}</div>`
-      // }
     },
     grid: {
       left: 20,
@@ -105,9 +108,30 @@ function initChart(canvas, width, height, dpr) {
     series: [
       {
         data: payData,
-        name: 'number',
+        name: 'A',
         type: 'bar',
-        barWidth: '35%'
+        barWidth: '12%'
+      },
+      {
+        data: demandData[0],
+        name: 'B',
+        type: 'bar',
+        barWidth: '12%'
+      },{
+        data: demandData[1],
+        name: 'C',
+        type: 'bar',
+        barWidth: '12%'
+      },{
+        data: demandData[2],
+        name: 'D',
+        type: 'bar',
+        barWidth: '12%'
+      },{
+        data: demandData[3],
+        name: 'E',
+        type: 'bar',
+        barWidth: '12%'
       }
     ]
   };
@@ -121,11 +145,6 @@ Page({
       onInit: initChart
     }
   },
-  onReady() {
-    setTimeout(function () {
-      // 获取 chart 实例的方式
-      // console.log(chart)
-    }, 2000);
-  }
+  onReady() {}
 });
 

@@ -1,7 +1,17 @@
 import * as echarts from '../../miniprogram_npm/ec-canvas/echarts';
 
 const app = getApp();
-
+const lowData = [18, 25, 10, 32, 15, 38];
+let onTitle = ''
+function getInterval() {
+  const len = lowData.length
+  const k = len%6
+  if(k !== 0) {
+    return Math.ceil(len/6)
+  }else{
+    return (len/6 - 1)
+  }
+}
 function initChart(canvas, width, height, dpr) {
   const chart = echarts.init(canvas, null, {
     width: width,
@@ -12,54 +22,78 @@ function initChart(canvas, width, height, dpr) {
 
   var option = {
     title: {
-      text: '测试下面legend的红色区域不应被裁剪',
+      text: onTitle,
+      textStyle: {
+        fontSize: 14,
+        fontWeight: 'normal',
+        color: '#333333',
+      },
       left: 'center'
     },
-    legend: {
-      data: ['A', 'B', 'C'],
-      top: 50,
-      left: 'center',
-      backgroundColor: 'red',
-      z: 100
-    },
+    // legend: {
+    //   data: ['A', 'B', 'C'],
+    //   top: 50,
+    //   left: 'center',
+    //   backgroundColor: 'red',
+    //   z: 100
+    // },
     grid: {
+      left: 20,
+      right: 20,
+      bottom: 15,
+      top: 40,
       containLabel: true
     },
     tooltip: {
-      show: true,
-      trigger: 'axis'
+      trigger: 'axis',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      color: 'rgba(0, 0, 0)',
+      borderWidth: '0',
+      textStyle: {
+        color: '#ffffff'
+      },
+      axisPointer: {
+        type: 'line',
+        lineStyle: {
+          color: '#a6a6a6'
+        }
+      },
     },
     xAxis: {
       type: 'category',
-      boundaryGap: false,
-      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-      // show: false
+      data: ['2022年1月', '2022年2月', '2022年3月', '2022年4月', '2022年5月', '2022年6月'],
+      axisTick: {
+        show: false
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#a6a6a6'
+        }
+      },
+      axisLabel: {
+        interval: getInterval(),
+        rotate: 30,
+        color: '#333333',
+        fontSize: 12
+      }
     },
     yAxis: {
-      x: 'center',
       type: 'value',
-      splitLine: {
+      axisLine: {
         lineStyle: {
-          type: 'dashed'
+          color: '#a6a6a6'
         }
+      },
+      axisLabel: {
+        color: '#333333',
+        fontSize: 12
       }
-      // show: false
     },
     series: [{
-      name: 'A',
+      data: lowData,
+      name: 'number',
       type: 'line',
-      smooth: true,
-      data: [18, 36, 65, 30, 78, 40, 33]
-    }, {
-      name: 'B',
-      type: 'line',
-      smooth: true,
-      data: [12, 50, 51, 35, 70, 30, 20]
-    }, {
-      name: 'C',
-      type: 'line',
-      smooth: true,
-      data: [10, 30, 31, 50, 40, 20, 10]
+      smooth: false,
     }]
   };
 
@@ -67,21 +101,23 @@ function initChart(canvas, width, height, dpr) {
   return chart;
 }
 
-Page({
-  onShareAppMessage: function (res) {
-    return {
-      title: 'ECharts 可以在微信小程序中使用啦！',
-      path: '/pages/index/index',
-      success: function () { },
-      fail: function () { }
-    }
-  },
+Component({
   data: {
     ec: {
       onInit: initChart
     }
   },
-
+  properties: {
+    titleChart: {
+      type: String,
+      value: '',
+      observer: function(val){
+        onTitle = val
+      }
+    }
+  },
+  methods: {},
   onReady() {
   }
 });
+

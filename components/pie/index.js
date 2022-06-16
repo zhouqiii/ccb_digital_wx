@@ -11,31 +11,67 @@ function initChart(canvas, width, height, dpr) {
   canvas.setChart(chart);
 
   var option = {
+    title: {
+      text: '阶段时长占比',
+      textStyle: {
+        fontSize: 14,
+        fontWeight: 'normal',
+        color: '#333333',
+      },
+      left: 'center'
+    },
     backgroundColor: "#ffffff",
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      color: 'rgba(0, 0, 0)',
+      borderWidth: '0',
+      borderColor: 'none',
+      textStyle: {
+        color: '#ffffff',
+        fontSize: 12
+      },
+      confine:true//将此限制打开后tooltip将不再溢出
+    },
+    legend: {
+      orient: 'vertical',
+      right: '20',
+      bottom: '0',
+      padding:[2, 5]
+    },
     series: [{
+      avoidLabelOverlap: true,
       label: {
         normal: {
-          fontSize: 14
+          fontSize: 12,
+          color: '#333333',
+          position:'inner',
+          formatter: '{b}\n{d}%'
         }
       },
+      labelLine:{ // 当⽂案不在扇形⾥就会有这根线连接对应的⽂案和扇形，当⽂案在扇形内则隐藏起来
+        normal:{
+         show:true
+        }
+       },
       type: 'pie',
       center: ['50%', '50%'],
-      radius: ['20%', '40%'],
+      radius: '50%',
       data: [{
         value: 55,
-        name: '北京'
+        name: '需求阶段'
       }, {
         value: 20,
-        name: '武汉'
+        name: '设计阶段'
       }, {
         value: 10,
-        name: '杭州'
+        name: '开发阶段'
       }, {
         value: 20,
-        name: '广州'
+        name: '测试阶段'
       }, {
         value: 38,
-        name: '上海'
+        name: '投产阶段'
       }]
     }]
   };

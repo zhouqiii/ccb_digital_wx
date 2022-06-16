@@ -2,11 +2,56 @@
 .platform{
   height: 100%;
   width: 100%;
+  font-size: 24rpx;
+  color: #333333
 }
 .tab_time{
   display: flex;
   flex-direction: row;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin: 15rpx 0;
 }
 .time_text{
-  min-width: 100px;
+  min-width: 160rpx;
 }
+.time_line{
+  margin: 0 20rpx;
+}
+.titleMax{
+  font-size: 32rpx;
+}
+/*tab栏主题修改开始*/
+.van-tab {
+  font-size: 32rpx !important;
+  color: #333333 !important;
+}
+.van-tab--active {
+  color: #333333 !important;
+  font-weight: bolder !important;
+}
+.van-tabs__line{
+  width: 40% !important;
+  right: 5% !important;
+  background-color: yellowgreen !important
+}
+/*tab栏主题修改结束*/
+/*时间组件主题修改开始*/
+.van-cell{
+  padding: 0 !important;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: rgba(0, 204, 255, 0.2) !important;
+}
+.van-field__control{
+  font-size:24rpx;
+  color: #333333;
+  text-align: center !important;
+
+}
+.van-cell__right-icon-wrap{
+  color: #333333 !important;
+  margin-left: 20rpx;
+  font-size: 12px !important;
+}
+/*时间组件主题修改结束*/
