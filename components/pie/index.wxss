@@ -1,8 +1,42 @@
 /**index.wxss**/
-.container{
+.bar_title{
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  color: '#333333';
+  height: 36rpx;
+  line-height: 36rpx;
+}
+.bar_data{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.data_chart{
   height: 220px;
+  width: 60%;
+}
+.data_table{
+  width: 40%;
+  margin-top: 10%;
+  line-height: 36rpx;
 }
 ec-canvas {
   width: 100%;
   height: 100%;
+}
+.fontBold{
+  font-weight: bold;
+}
+.tips{
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: normal;
+  padding: 40rpx;
+}
+/*vant dialog样式定制*/
+.dialog-index--van-dialog__confirm{
+  height: 30px !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
 }

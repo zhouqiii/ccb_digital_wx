@@ -1,22 +1,26 @@
 // index.js
-Page({
+Component({
   data: {
     listData: [
-      { "date": "2019/01/01", "time": "9:00", "content": "工作内容1" },
-      { "date": "2019/01/01", "time": "10:30", "content": "工作内容2" },
-      { "date": "2019/01/01", "time": "12:00", "content": "工作内容3" },
-      { "date": "2019/01/01", "time": "2:30", "content": "工作内容4" },
-      { "date": "2019/01/01", "time": "3:30", "content": "工作内容5" },
-      { "date": "2019/01/01", "time": "4:00", "content": "工作内容6" },
-      { "date": "2019/01/01", "time": "5:00", "content": "工作内容7" },
-      { "date": "2019/01/02", "time": "9:00", "content": "工作内容1" },
-      { "date": "2019/01/02", "time": "10:30", "content": "工作内容2" },
-      { "date": "2019/01/02", "time": "12:00", "content": "工作内容3" },
-      { "date": "2019/01/02", "time": "2:30", "content": "工作内容4" },
-      { "date": "2019/01/02", "time": "3:30", "content": "工作内容5" },
-      { "date": "2019/01/02", "time": "4:00", "content": "工作内容6" },
-      { "date": "2019/01/02", "time": "5:00", "content": "工作内容7" }
-    ]
+      { "name": "工具链1", "times": "40" },
+      { "name": "工具链2", "times": "100" },
+      { "name": "工具链3", "times": "13" },
+      { "name": "工具链4", "times": "65" },
+      { "name": "工具链55555", "times": "88" },
+    ],
+    onTitle: '',
+    ifUpSort: true
+  },
+  properties: {
+    titleChart: {
+      type: String,
+      value: '',
+      observer: function(val){
+        this.setData({
+          onTitle: val
+        })
+      }
+    }
   },
   onLoad: function () {
     console.log('onLoad')

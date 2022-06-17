@@ -1,6 +1,15 @@
 /**index.wxss**/
+.tableTitle{
+  text-align: center;
+  font-size: 14px;
+  font-weight: normal;
+  color: '#333333';
+  height: 36rpx;
+  line-height: 36rpx;
+  margin-bottom: 10rpx;
+}
 .tableView{
-  border:1px solid #000;
+  border:1px solid rgba(0, 204, 255, 0.2);
   border-right:0;
   border-bottom: 0;
   width: 98%;
@@ -10,34 +19,43 @@
 .table_header{
   display: flex;
   justify-content: space-between; /* 项目位于各行之间留有空白的容器内。 */
-  background-color: #fffb00;
+  background-color: rgba(0, 204, 255, 0.2);
   width: 100%;
-  font-size: 35rpx;
-  color: #330e0e;
+  font-size: 28rpx;
+  color: #333333;
   text-align: center;
-  font-weight: 900;
+  font-weight: bold;
 } 
 .th{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80rpx;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
+  height: 70rpx;
+  border-bottom: 1px solid rgba(0, 204, 255, 0.2);
+  border-right: 1px solid rgba(0, 204, 255, 0.2);
 }
-.th1,.th2{
-  width: 20%
+.th1,.th2,.td1,.td2{
+  width: 50%
 }
-.th3{
-  width: 60%
+.filter, .sort{
+  margin-top: 5rpx;
+  margin-left: 60rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
+/* .td1{
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow:ellipsis;
+} */
 /* 表格cell */
 .table_cell{
   display: flex;
   justify-content: space-between; /* 项目位于各行之间留有空白的容器内。 */
   width: 100%;
-  font-size: 25rpx;
-  color: #330e0e;
+  font-size: 24rpx;
+  color: #333333;
   text-align: center;
 }
 .td{
@@ -45,13 +63,7 @@
   align-items: center;
   justify-content: center;
   height: 60rpx;
-  border-bottom: 1px solid #000;
-  border-right: 1px solid #000;
-  
+  border-bottom: 1px solid rgba(0, 204, 255, 0.2);
+  border-right: 1px solid rgba(0, 204, 255, 0.2);
 } 
-.td1,.td2{
-  width: 20%
-} 
-.td3{
-  width: 60%
-}
+

@@ -1,4 +1,28 @@
 <!--index.wxml-->
-<view class="container">
-  <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+<view>
+  <view class="bar_title">阶段时长占比</view>
+  <view class="bar_data">
+    <view class="data_chart">
+      <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+    </view>
+    <view class="data_table">
+      <view class="fontBold">
+        行业参考值
+        <van-icon name="info-o" color="#333333" size="12px" bindtap="showTips"/>
+        <van-dialog
+          use-slot
+          show="{{ tips }}"
+          bind:close="onClose"
+        >
+          <view class="tips">
+            <view>来源:《2021中国软件行业基准数据报告》</view>
+            <view>(计算范围根据所选时间范围内)</view>
+          </view>
+        </van-dialog>
+      </view>
+      <block wx:for="{{ tableData }}" wx:for-item="time" wx:key="key">
+        <view>{{time.name}}：{{time.percent}}%</view>
+      </block>
+    </view>
+  </view>
 </view>

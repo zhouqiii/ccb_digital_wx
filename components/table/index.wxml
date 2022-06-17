@@ -1,15 +1,29 @@
 <!--index.wxml-->
+<view class="tableTitle">{{onTitle}}</view>
 <view class="tableView">
   <view class="table_header">
-    <view class="th th1">日期</view>
-    <view class="th th2">时间</view>
-    <view class="th th3">工作内容</view>
+    <view class="th th1">
+      工具链名称
+      <image
+        wx:if="{{ ifUpSort }}"
+        src="/images/sortup.png"
+        class="sort"
+      />
+      <image
+        wx:if="{{ !ifUpSort }}"
+        src="/images/sortlow.png"
+        class="sort"
+      />
+    </view>
+    <view class="th th2">
+      执行次数
+      <image src="/images/filter.png" class="filter"/>
+    </view>
   </view>
   <block wx:for="{{ listData }}" wx:for-item="work" wx:key="key">
     <view class="table_cell">
-      <view class="td td1">{{work.date}}</view>
-      <view class="td td2">{{work.time}}</view>
-      <view class="td td3">{{work.content}}</view>
+      <view class="td td1">{{work.name}}</view>
+      <view class="td td2">{{work.times}}</view>
     </view>
   </block>
 

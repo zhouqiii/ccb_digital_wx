@@ -31,7 +31,7 @@
             <chart-pie></chart-pie>
           </view>
           <view>
-            <chart-table></chart-table>
+            <chart-line id="change_time" titleChart="变更前置时间"></chart-line>
           </view>
         </view>
       </van-tab>
@@ -42,16 +42,26 @@
           <text class="time_line">—</text>
           <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择结束日期" is-link readonly/>
         </view>
-        <view>
-          <text>一、流水线执行效率</text>
-          <view wx:if="{{isLoaded}}">
-            <chart-pie></chart-pie>
+        <view wx:if="{{isLoaded}}">
+          <text class="titleMax">一、流水线执行效率</text>
+          <view>
+            <chart-line id="line_duration" titleChart="流水线平均执行时长(秒)"></chart-line>
+          </view>
+          <view class="flex_row">
+            <chart-bar id="line_times" chartTitle="流水线日均执行峰值(次)"></chart-bar>
+            <chart-line id="line_seccess" titleChart="流水线累计成功率(%)"></chart-line>
           </view>
         </view>
-        <view>
-          <text>二、工具链效率分析</text>
+        <view wx:if="{{isLoaded}}">
+          <text class="titleMax">二、工具链效率分析</text>
           <view>
-            <chart-table></chart-table>
+            <chart-line id="tool_duration" titleChart="工具链平均执行时长(秒)"></chart-line>
+          </view>
+          <view>
+            <chart-line id="tool_success" titleChart="工具链累计执行成功率(%)"></chart-line>
+          </view>
+          <view>
+            <chart-table titleChart="常用工具链TOP5"></chart-table>
           </view>
         </view>
       </van-tab>

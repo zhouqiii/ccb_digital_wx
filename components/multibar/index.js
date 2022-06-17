@@ -23,7 +23,7 @@ function initChart(canvas, width, height, dpr) {
 
   var option = {
     title: {
-      text: '需求各阶段·时长',
+      text: '需求各阶段时长',
       textStyle: {
         fontSize: 14,
         fontWeight: 'normal',
@@ -34,7 +34,12 @@ function initChart(canvas, width, height, dpr) {
     legend: {
       orient: 'horizontal',
       left: 'center',
-      bottom: '0'
+      bottom: '0',
+      itemWidth: 10,
+      itemHeight: 10,
+      itemStyle: {
+        borderWidth: 0
+      }
     },
     itemStyle: {
       color: '#0098e1'
@@ -108,28 +113,28 @@ function initChart(canvas, width, height, dpr) {
     series: [
       {
         data: payData,
-        name: 'A',
+        name: '需求',
         type: 'bar',
         barWidth: '12%'
       },
       {
         data: demandData[0],
-        name: 'B',
+        name: '设计',
         type: 'bar',
         barWidth: '12%'
       },{
         data: demandData[1],
-        name: 'C',
+        name: '开发',
         type: 'bar',
         barWidth: '12%'
       },{
         data: demandData[2],
-        name: 'D',
+        name: '测试',
         type: 'bar',
         barWidth: '12%'
       },{
         data: demandData[3],
-        name: 'E',
+        name: '投产',
         type: 'bar',
         barWidth: '12%'
       }
