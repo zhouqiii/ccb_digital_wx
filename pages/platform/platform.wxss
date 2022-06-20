@@ -1,19 +1,38 @@
 /* pages/platfrom/platfrom.wxss */
-.flex_row,.tab_time{
+
+.platform{
+  height: 100%;
+  font-size: 24rpx;
+  color: #333333;
+  padding: 10px 16px;
+  background: #ffffff;
+}
+.flex_row,.tab_time, .tab_time_next{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.platform{
-  height: 100%;
-  width: 100%;
-  font-size: 24rpx;
-  color: #333333
+.row_btw{
+  justify-content: space-between;
 }
-.tab_time{
+.tab_sticky{
+  height: 50rpx;
+  margin: 20rpx 0;
+  background: #f6f6f6;
+}
+.tab_chart{
+  background: #f6f6f6;
+  border-radius: 4px;
+}
+.tab_time, .tab_time_next{
   height: 50rpx;
   line-height: 50rpx;
+}
+.tab_time{
   margin: 15rpx 0;
+}
+.tab_time_next{
+  margin: 15rpx 16px;
 }
 .time_text{
   min-width: 160rpx;
@@ -24,24 +43,19 @@
 .titleMax{
   font-size: 32rpx;
 }
-#line_times,#line_seccess{
-  width: 50%;
+#line_times,#line_seccess,#line_efficiency_three,#line_efficiency_six{
+  width: 48%;
+  margin-top: 10px;
+  background: rgb(228, 225, 225);
+  border: 1px solid rgb(228, 225, 225);
+  border-radius: 10px;
 }
-/*tab栏主题修改开始*/
-.van-tab {
-  font-size: 32rpx !important;
-  color: #333333 !important;
+.marTop{
+  margin-top: 10px;
+  background: rgb(228, 225, 225);
+  border: 1px solid rgb(228, 225, 225);
+  border-radius: 10px;
 }
-.van-tab--active {
-  color: #333333 !important;
-  font-weight: bolder !important;
-}
-.van-tabs__line{
-  width: 40% !important;
-  right: 5% !important;
-  background-color: yellowgreen !important
-}
-/*tab栏主题修改结束*/
 /*时间组件主题修改开始*/
 .van-cell{
   padding: 0 !important;

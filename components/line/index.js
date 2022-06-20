@@ -44,21 +44,21 @@ function initChart(canvas, width, height, dpr) {
       top: 40,
       containLabel: true
     },
-    tooltip: {
-      trigger: 'axis',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      color: 'rgba(0, 0, 0)',
-      borderWidth: '0',
-      textStyle: {
-        color: '#ffffff'
-      },
-      axisPointer: {
-        type: 'line',
-        lineStyle: {
-          color: '#a6a6a6'
-        }
-      },
-    },
+    // tooltip: {
+    //   trigger: 'axis',
+    //   backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    //   color: 'rgba(0, 0, 0)',
+    //   borderWidth: '0',
+    //   textStyle: {
+    //     color: '#ffffff'
+    //   },
+    //   axisPointer: {
+    //     type: 'line',
+    //     lineStyle: {
+    //       color: '#a6a6a6'
+    //     }
+    //   },
+    // },
     xAxis: {
       type: 'category',
       data: ['2022年1月', '2022年2月', '2022年3月', '2022年4月', '2022年5月', '2022年6月'],
@@ -94,6 +94,12 @@ function initChart(canvas, width, height, dpr) {
       name: 'number',
       type: 'line',
       smooth: false,
+      label: {
+        show: true,
+        position: 'top',
+        color: '#333333',
+        fontSize: 12
+      },
     }]
   };
 

@@ -33,24 +33,24 @@ function initChart(canvas, width, height, dpr) {
     itemStyle: {
       color: '#0098e1'
     },
-    tooltip: {
-      trigger: 'axis',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      color: 'rgba(0, 0, 0)',
-      borderWidth: '0',
-      textStyle: {
-        color: '#ffffff'
-      },
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
-        lineStyle: {
-          color: '#a6a6a6'
-        }
-      },
-      // formatter(params) {
-      //   return `<div>${params[0].name}: ${params[0].value}</div>`
-      // }
-    },
+    // tooltip: {
+    //   trigger: 'axis',
+    //   backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    //   color: 'rgba(0, 0, 0)',
+    //   borderWidth: '0',
+    //   textStyle: {
+    //     color: '#ffffff'
+    //   },
+    //   axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+    //     type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
+    //     lineStyle: {
+    //       color: '#a6a6a6'
+    //     }
+    //   },
+    //   // formatter(params) {
+    //   //   return `<div>${params[0].name}: ${params[0].value}</div>`
+    //   // }
+    // },
     grid: {
       left: 20,
       right: 20,
@@ -107,7 +107,20 @@ function initChart(canvas, width, height, dpr) {
         data: payData,
         name: 'number',
         type: 'bar',
-        barWidth: '35%'
+        barWidth: '35%',
+        label: {
+          show: true,
+          position: 'top',
+          color: '#333333',
+          fontSize: 12
+        },
+        // itemStyle: { // 是否设置渐变色
+        //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        //     { offset: 0, color: '#83bff6' },
+        //     { offset: 0.5, color: '#188df0' },
+        //     { offset: 1, color: '#188df0' }
+        //   ])
+        // },
       }
     ]
   };

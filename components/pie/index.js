@@ -45,7 +45,7 @@ function initChart(canvas, width, height, dpr) {
     //   },
     //   right: '0'
     // },
-    backgroundColor: "#ffffff",
+    backgroundColor: "rgb(228, 225, 225)",
     tooltip: {
       trigger: 'item',
       backgroundColor: 'rgba(0, 0, 0, 0.5)',

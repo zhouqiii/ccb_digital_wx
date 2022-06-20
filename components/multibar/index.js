@@ -49,8 +49,10 @@ function initChart(canvas, width, height, dpr) {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       color: 'rgba(0, 0, 0)',
       borderWidth: '0',
+      renderMode: 'richText',
       textStyle: {
-        color: '#ffffff'
+        color: '#ffffff',
+        fontSize: 12
       },
       axisPointer: {            // 坐标轴指示器，坐标轴触发有效
         type: 'line',        // 默认为直线，可选为：'line' | 'shadow'

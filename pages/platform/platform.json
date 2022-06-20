@@ -4,6 +4,7 @@
     "chart-multi-bar": "../../components/multibar/index",
     "chart-line": "../../components/line/index",
     "chart-pie": "../../components/pie/index",
-    "chart-table": "../../components/table/index"
+    "chart-table": "../../components/table/index",
+    "chart-guage": "../../components/guage/index"
   }
 }

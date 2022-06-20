@@ -8,16 +8,18 @@
         wx:if="{{ ifUpSort }}"
         src="/images/sortup.png"
         class="sort"
+        bindtap="changeSort"
       />
       <image
         wx:if="{{ !ifUpSort }}"
         src="/images/sortlow.png"
         class="sort"
+        bindtap="changeSort"
       />
     </view>
     <view class="th th2">
       执行次数
-      <image src="/images/filter.png" class="filter"/>
+      <!-- <image src="/images/filter.png" class="filter"/> -->
     </view>
   </view>
   <block wx:for="{{ listData }}" wx:for-item="work" wx:key="key">
