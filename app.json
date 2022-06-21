@@ -2,7 +2,8 @@
   "pages": [
     "pages/platform/platform",
     "pages/index/index",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/drill/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -23,6 +24,9 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-field": "@vant/weapp/field/index",
     "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-dialog": "@vant/weapp/dialog/index",
     "van-button": "@vant/weapp/button/index",
     "van-calendar": "@vant/weapp/calendar/index",
     "van-tabbar": "@vant/weapp/tabbar/index",

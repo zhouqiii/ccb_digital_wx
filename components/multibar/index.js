@@ -1,10 +1,14 @@
 import * as echarts from '../../miniprogram_npm/ec-canvas/echarts';
 
-let chart = null;
-const payData = [18, 25, 10, 32, 15, 38];
-const demandData = [[20,30,11,32,4,42],[32,15,28,48,2,21],[46,32,11,12,14,49],[12,42,27,31,19,4]]
-function getInterval() {
-  const len = payData.length
+const step = new Map()
+  .set(0, '需求')
+  .set(1, '评审')
+  .set(2, '开发')
+  .set(3, '测试')
+  .set(4, '投产')
+
+function getInterval(data) {
+  const len = data[0].length
   const k = len%6
   if(k !== 0) {
     return Math.ceil(len/6)
@@ -13,17 +17,10 @@ function getInterval() {
   }
 }
 
-function initChart(canvas, width, height, dpr) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-
+function setOption(chart, data, time, title){
   var option = {
     title: {
-      text: '需求各阶段时长',
+      text: title,
       textStyle: {
         fontSize: 14,
         fontWeight: 'normal',
@@ -81,7 +78,7 @@ function initChart(canvas, width, height, dpr) {
     xAxis: [
       {
         type: 'category',
-        data: ['2022年1月', '2022年2月', '2022年3月', '2022年4月', '2022年5月', '2022年6月'],
+        data: time,
         axisTick: {
           show: false
         },
@@ -91,7 +88,7 @@ function initChart(canvas, width, height, dpr) {
           }
         },
         axisLabel: {
-          interval: getInterval(),
+          interval: getInterval(data),
           rotate: 30,
           color: '#333333',
           fontSize: 12
@@ -112,45 +109,65 @@ function initChart(canvas, width, height, dpr) {
         }
       }
     ],
-    series: [
-      {
-        data: payData,
-        name: '需求',
-        type: 'bar',
-        barWidth: '12%'
-      },
-      {
-        data: demandData[0],
-        name: '设计',
-        type: 'bar',
-        barWidth: '12%'
-      },{
-        data: demandData[1],
-        name: '开发',
-        type: 'bar',
-        barWidth: '12%'
-      },{
-        data: demandData[2],
-        name: '测试',
-        type: 'bar',
-        barWidth: '12%'
-      },{
-        data: demandData[3],
-        name: '投产',
-        type: 'bar',
-        barWidth: '12%'
-      }
-    ]
+    series: data
   };
   chart.setOption(option);
   return chart;
 }
-
-Page({
+Component({
   data: {
     ec: {
-      onInit: initChart
+      lazyLoad: true
     }
+  },
+  properties: {
+    titleChart: {
+      type: String,
+      value: '',
+      observer: function(val){
+      }
+    },
+    dataChart: {
+      type: Array,
+      value: [],
+      observer: function(val){
+        let obj1 = []
+        let list = []
+        let dateList = val.map((item) => item.date)
+        val.forEach((item) => {
+          item.data.forEach((ele, index) => {
+            if(obj1[index]) {
+             obj1[index].push(ele)
+            } else {
+              obj1[index] = [ele]
+             }
+           })
+        })
+        obj1.forEach((item, index) => {
+          list.push({
+            data: item,
+            name: step.get(index),
+            type: 'bar',
+            barWidth: '12%'
+          })
+        })
+        this.initMultiBar(list, dateList, this.data.titleChart)
+      }
+    }
+  },
+  methods: {
+    initMultiBar:function(data, time, title){
+      let ecComponent = this.selectComponent('#mychart-dom-multibar');
+      ecComponent.init((canvas, width, height, dpr) => {
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        setOption(chart, data, time, title);
+        return chart;
+      });
+    },
   },
   onReady() {}
 });

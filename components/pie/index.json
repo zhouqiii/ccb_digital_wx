@@ -1,4 +1,5 @@
 {
+  "component": true,
   "usingComponents": {
     "ec-canvas": "../../miniprogram_npm/ec-canvas/ec-canvas"
   }

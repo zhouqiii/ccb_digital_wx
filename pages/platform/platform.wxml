@@ -1,84 +1,83 @@
 <view class="platform">
-  <view class="plat_tab">
-    <van-tabs sticky bind:change="onChange">
-      <van-tab title="敏捷研发">
+  <van-tabs sticky bind:change="onChange">
+    <van-tab title="敏捷研发">
+      <van-sticky offset-top="{{ 43 }}">
         <view class="tab_sticky">
-          <van-sticky offset-top="{{ 55 }}">
-            <view class="tab_time">
-              <text class="time_text">年月区间</text>
-              <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
-              <!-- <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' /> -->
-              <text class="time_line">—</text>
-              <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择结束日期" is-link readonly/>
-              <!-- <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' /> -->
-            </view>
-          </van-sticky>
+          <view class="tab_time">
+            <text class="time_text">年月区间</text>
+            <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
+            <!-- <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' /> -->
+            <text class="time_line">—</text>
+            <van-field value="{{ endDate }}" bindtap="showEndPop" placeholder="请选择结束日期" is-link readonly/>
+            <!-- <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' /> -->
+          </view>
         </view>
+      </van-sticky>
+      <scroll-view style="height: 100%"  bindscroll="touchclose" scroll-with-animation="true" scroll-top="{{ scrollTopFir }}">
         <view class="tab_chart">
           <text class="titleMax">一、敏捷交付能力</text>
           <view class="marTop">
-            <chart-bar id="pay_rate"></chart-bar>
+            <chart-bar titleChart="敏捷交付能力" dataChart="{{ payFuncList }}"></chart-bar>
           </view>
           <view class="marTop">
-            <chart-line id="create_rate" titleChart="需求变更率"></chart-line>
+            <chart-line titleChart="需求变更率" dataChart="{{ changeRateList }}"></chart-line>
           </view>
           <view class="marTop">
-            <chart-line id="value_rate" titleChart="需求价值达成率"></chart-line>
+            <chart-line titleChart="需求价值达成率" dataChart="{{ valueRateList }}"></chart-line>
           </view>
         </view>
         <view class="tab_chart">
           <text class="titleMax">二、敏捷交付速率</text>
           <view class="marTop">
-            <chart-multi-bar id="demand_time"></chart-multi-bar>
+            <chart-multi-bar titleChart="需求各阶段时长" dataChart="{{ demandTimeList }}"></chart-multi-bar>
           </view>
           <view class="marTop">
-            <chart-pie></chart-pie>
+            <chart-pie dataChart="{{ stepTimeRate }}"></chart-pie>
           </view>
           <view class="marTop">
-            <chart-line id="change_time" titleChart="变更前置时间"></chart-line>
+            <chart-line titleChart="变更前置时间"  dataChart="{{ changeTimeList }}"></chart-line>
           </view>
         </view>
-      </van-tab>
-      <van-tab title="持续交付">
+      </scroll-view>
+    </van-tab>
+    <van-tab title="持续交付">
+      <van-sticky offset-top="{{ 43 }}">
         <view class="tab_sticky">
-          <van-sticky offset-top="{{ 55 }}">
-            <view class="tab_time_next">
-              <text class="time_text">年月区间</text>
-              <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
-              <text class="time_line">—</text>
-              <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择结束日期" is-link readonly/>
-            </view>
-          </van-sticky>
-        </view>
-        <view wx:if="{{isLoaded}}" class="tab_chart">
-          <text class="titleMax">一、流水线执行效率</text>
-          <view class="flex_row row_btw">
-            <chart-guage id="line_efficiency_three"></chart-guage>
-            <chart-guage id="line_efficiency_six"></chart-guage>
-          </view>
-          <view class="marTop">
-            <chart-line id="line_duration" titleChart="流水线平均执行时长(秒)"></chart-line>
-          </view>
-          <view class="flex_row row_btw">
-            <chart-bar id="line_times" chartTitle="流水线日均执行峰值(次)"></chart-bar>
-            <chart-line id="line_seccess" titleChart="流水线累计成功率(%)"></chart-line>
+          <view class="tab_time">
+            <text class="time_text">年月区间</text>
+            <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
+            <text class="time_line">—</text>
+            <van-field value="{{ endDate }}" bindtap="showEndPop" placeholder="请选择结束日期" is-link readonly/>
           </view>
         </view>
-        <view wx:if="{{isLoaded}}" class="tab_chart">
-          <text class="titleMax">二、工具链效率分析</text>
-          <view class="marTop">
-            <chart-line id="tool_duration" titleChart="工具链平均执行时长(秒)"></chart-line>
-          </view>
-          <view class="marTop">
-            <chart-line id="tool_success" titleChart="工具链累计执行成功率(%)"></chart-line>
-          </view>
-          <view class="marTop">
-            <chart-table titleChart="常用工具链TOP5"></chart-table>
-          </view>
+      </van-sticky>
+      <view wx:if="{{isLoaded}}" class="tab_chart">
+        <text class="titleMax">一、流水线执行效率</text>
+        <view class="marTop">
+          <chart-guage titleChart="指标" dataChart="{{ indexRateList }}"></chart-guage>
         </view>
-      </van-tab>
-    </van-tabs>
-  </view>
+        <view class="marTop">
+          <chart-line titleChart="流水线平均执行时长(秒)" dataChart="{{ lineDurationList }}"></chart-line>
+        </view>
+        <view class="flex_row row_btw">
+          <chart-bar class="barPart" titleChart="流水线日均执行峰值(次)" dataChart="{{ lineTimesList }}"></chart-bar>
+          <chart-line class="linePart" titleChart="流水线累计成功率(%)" dataChart="{{ lineSuccessList }}"></chart-line>
+        </view>
+      </view>
+      <view wx:if="{{isLoaded}}" class="tab_chart">
+        <text class="titleMax">二、工具链效率分析</text>
+        <view class="marTop">
+          <chart-line titleChart="工具链平均执行时长(秒)" dataChart="{{ toolDurationList }}"></chart-line>
+        </view>
+        <view class="marTop">
+          <chart-line titleChart="工具链累计执行成功率(%)" dataChart="{{ toolSuccessList }}"></chart-line>
+        </view>
+        <view class="marTop">
+          <chart-table titleChart="常用工具链TOP5"></chart-table>
+        </view>
+      </view>
+    </van-tab>
+  </van-tabs>
 </view>
 
 <van-popup show='{{ popStart }}' position="bottom">

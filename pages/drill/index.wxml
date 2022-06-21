@@ -1,0 +1,4 @@
+<!--index.wxml-->
+<view>
+  <page-table title="{{title}}" data="{{listData}}" header="{{listHeader}}"></page-table>
+</view>

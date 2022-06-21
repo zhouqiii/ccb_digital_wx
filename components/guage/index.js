@@ -2,53 +2,19 @@ import * as echarts from '../../miniprogram_npm/ec-canvas/echarts';
 
 const app = getApp();
 const gaugeData = [
-  {
-    value: 20,
-    name: 'P00502000570',
-    title: {
-      show: false,
-      offsetCenter: [],// ['-80%', '80%']
-    },
-    detail: {
-      show: false,
-      offsetCenter: [],// ['-40%', '95%']
-    }
-  },
-  {
-    value: 40,
-    name: 'P00502000571',
-    title: {
-      show: false,
-      offsetCenter: [],// ['0%', '80%']
-    },
-    detail: {
-      show: false,
-      offsetCenter: [],// ['0%', '95%']
-    }
-  },
-  {
-    value: 60,
-    name: 'P00502000572',
-    title: {
-      show: false,
-      offsetCenter: [],// ['40%', '80%']
-    },
-    detail: {
-      show: false,
-      offsetCenter: [],// ['40%', '95%']
-    }
-  }
+  
 ];
-
-function initChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-
+function setOption(chart, data, title){
   var option = {
+    title: {
+      text: title,
+      textStyle: {
+        fontSize: 14,
+        fontWeight: 'normal',
+        color: '#333333',
+      },
+      left: 'center'
+    },
     series: [{
       type: 'gauge',
       anchor: {
@@ -60,10 +26,10 @@ function initChart(canvas, width, height, dpr) {
         }
       },
       pointer: {
-        // icon: 'path://M2.9,0.7L2.9,0.7c1.4,0,2.6,1.2,2.6,2.6v115c0,1.4-1.2,2.6-2.6,2.6l0,0c-1.4,0-2.6-1.2-2.6-2.6V3.3C0.3,1.9,1.4,0.7,2.9,0.7z',
-        // width: 10,
-        // length: '80%',
-        // offsetCenter: [0, '8%']
+        icon: 'path://M2.9,0.7L2.9,0.7c1.4,0,2.6,1.2,2.6,2.6v115c0,1.4-1.2,2.6-2.6,2.6l0,0c-1.4,0-2.6-1.2-2.6-2.6V3.3C0.3,1.9,1.4,0.7,2.9,0.7z',
+        width: 5,
+        length: '80%',
+        offsetCenter: [0, '8%']
       },
       progress: {//最外层圆环样式设置
         show: true,
@@ -74,7 +40,7 @@ function initChart(canvas, width, height, dpr) {
         show: true,
         roundCap: true
       },
-      data: gaugeData,
+      data: data,
       title: {
         fontSize: 12
       },
@@ -92,7 +58,7 @@ function initChart(canvas, width, height, dpr) {
     }]
   };
   chart.on("click", (event) => {
-    gaugeData.forEach((item, index) => {
+    data.forEach((item, index) => {
       if(index === event.dataIndex){
         item.title.show = true
         item.detail.show = true
@@ -108,17 +74,16 @@ function initChart(canvas, width, height, dpr) {
     chart.setOption({
       series: [
         {
-          data: gaugeData
+          data: data
         }
       ]
     });
   });
-  chart.setOption(option, true);
-
+  chart.setOption(option);
   return chart;
 }
 
-Page({
+Component({
   onShareAppMessage: function (res) {
     return {
       title: 'ECharts 可以在微信小程序中使用啦！',
@@ -129,10 +94,55 @@ Page({
   },
   data: {
     ec: {
-      onInit: initChart
+      lazyLoad: true
     }
   },
-
+  properties: {
+    titleChart: {
+      type: String,
+      value: '',
+      observer: function(val){
+      }
+    },
+    dataChart: {
+      type: Array,
+      value: [],
+      observer: function(val){
+        console.log(val, 'guageVal')
+        let list = []
+        val.forEach((item) => {
+          list.push({
+            value: item.value,
+            name: item.name,
+            title: {
+              show: false,
+              offsetCenter: [],// ['-80%', '80%']
+            },
+            detail: {
+              show: false,
+              offsetCenter: [],// ['40%', '95%']
+            }
+          })
+        })
+        this.initGuage(list, this.data.titleChart)
+      }
+    }
+  },
+  methods: {
+    initGuage:function(data, title){
+      let ecComponent = this.selectComponent('#mychart-dom-gauge');
+      ecComponent.init((canvas, width, height, dpr) => {
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        setOption(chart, data, title);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
+      });
+    },
+  },
   onReady() {
   }
 });

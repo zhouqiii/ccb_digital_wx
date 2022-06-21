@@ -1,50 +1,23 @@
 import * as echarts from '../../miniprogram_npm/ec-canvas/echarts';
 
 const app = getApp();
-const onData = [{
-  value: 55,
-  name: '需求阶段'
-}, {
-  value: 20,
-  name: '设计阶段'
-}, {
-  value: 10,
-  name: '开发阶段'
-}, {
-  value: 20,
-  name: '测试阶段'
-}, {
-  value: 38,
-  name: '投产阶段'
-}]
-const onCount = onData.reduce((pre, cur) => {
-  return pre += cur.value
-}, 0)
-function getData() {
-  let data = onData
+function countNum(list) {
+  const onCount = list.reduce((pre, cur) => {
+    return pre += cur.value
+  }, 0)
+  return onCount
+}
+function getData(list) {
+  const onCount = countNum(list)
+  let data = list
   data.forEach((item) => {
     const percent = ((item.value/onCount)*100).toFixed(2)
     item.percent = percent
   })
   return data
 }
-function initChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
+function setOption(chart, data){
   var option = {
-    // title: {
-    //   text: '阶段时长占比',
-    //   textStyle: {
-    //     fontSize: 14,
-    //     fontWeight: 'normal',
-    //     color: '#333333',
-    //   },
-    //   right: '0'
-    // },
     backgroundColor: "rgb(228, 225, 225)",
     tooltip: {
       trigger: 'item',
@@ -90,39 +63,63 @@ function initChart(canvas, width, height, dpr) {
       type: 'pie',
       center: ['50%', '50%'],
       radius: '50%',
-      data: onData
+      data: data
     }]
   };
-
   chart.setOption(option);
   return chart;
 }
-
-Page({
-  onShareAppMessage: function (res) {
-    return {
-      title: 'ECharts 可以在微信小程序中使用啦！',
-      path: '/pages/index/index',
-      success: function () { },
-      fail: function () { }
-    }
-  },
+Component({
   data: {
     ec: {
-      onInit: initChart,
+      lazyLoad: true
     },
-    tableData: getData(),
+    tableData: [],
     tips: false
     ,
+  },
+  properties: {
+    titleChart: {
+      type: String,
+      value: '',
+      observer: function(val){
+      }
+    },
+    dataChart: {
+      type: Array,
+      value: [],
+      observer: function(val){
+        this.setData({
+          tableData: getData(val)
+        })
+        this.initPie(val)
+      }
+    }
+  },
+  methods: {
+    initPie:function(data){
+      let ecComponent = this.selectComponent('#mychart-dom-pie');
+      ecComponent.init((canvas, width, height, dpr) => {
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        setOption(chart, data);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
+      });
+    },
+    showTips() {
+      this.setData({ tips: true })
+    },
+    onClose() {
+      this.setData({ tips: false })
+    }
   },
   onReady() {
   },
   onLoad(options) {
   },
-  showTips() {
-    this.setData({ tips: true })
-  },
-  onClose() {
-    this.setData({ tips: false })
-  }
+  
 });

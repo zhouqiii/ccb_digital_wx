@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="table_page">
+  <view class="tableTitle">{{onTitle}}</view>
+  <view class="tableView">
+    <view class="table_header">
+      <block wx:for="{{ onHeader }}" wx:for-item="header" wx:key="key">
+        <view class="th th1">{{ header }}</view>
+      </block>
+    </view>
+    <scroll-view scroll-y="true">
+      <block wx:for="{{ onData }}" wx:for-item="work" wx:key="key">
+        <view class="table_cell">
+          <view class="td td1">{{work.name}}</view>
+          <view class="td td2">{{work.times}}</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

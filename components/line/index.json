@@ -2,5 +2,8 @@
   "component": true,
   "usingComponents": {
     "ec-canvas": "../../miniprogram_npm/ec-canvas/ec-canvas"
+  },
+  "pages": {
+    "abcd": "../../pages/drill/index"
   }
 }

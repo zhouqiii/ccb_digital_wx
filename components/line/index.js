@@ -1,10 +1,8 @@
 import * as echarts from '../../miniprogram_npm/ec-canvas/echarts';
 
 const app = getApp();
-const lowData = [18, 25, 10, 32, 15, 38];
-let onTitle = ''
-function getInterval() {
-  const len = lowData.length
+function getInterval(data) {
+  const len = data.length
   const k = len%6
   if(k !== 0) {
     return Math.ceil(len/6)
@@ -12,17 +10,10 @@ function getInterval() {
     return (len/6 - 1)
   }
 }
-function initChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-
+function setOption(chart, data, time, title){
   var option = {
     title: {
-      text: onTitle,
+      text: title,
       textStyle: {
         fontSize: 14,
         fontWeight: 'normal',
@@ -30,13 +21,6 @@ function initChart(canvas, width, height, dpr) {
       },
       left: 'center'
     },
-    // legend: {
-    //   data: ['A', 'B', 'C'],
-    //   top: 50,
-    //   left: 'center',
-    //   backgroundColor: 'red',
-    //   z: 100
-    // },
     grid: {
       left: 20,
       right: 20,
@@ -44,24 +28,9 @@ function initChart(canvas, width, height, dpr) {
       top: 40,
       containLabel: true
     },
-    // tooltip: {
-    //   trigger: 'axis',
-    //   backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    //   color: 'rgba(0, 0, 0)',
-    //   borderWidth: '0',
-    //   textStyle: {
-    //     color: '#ffffff'
-    //   },
-    //   axisPointer: {
-    //     type: 'line',
-    //     lineStyle: {
-    //       color: '#a6a6a6'
-    //     }
-    //   },
-    // },
     xAxis: {
       type: 'category',
-      data: ['2022年1月', '2022年2月', '2022年3月', '2022年4月', '2022年5月', '2022年6月'],
+      data: time,
       axisTick: {
         show: false
       },
@@ -71,7 +40,7 @@ function initChart(canvas, width, height, dpr) {
         }
       },
       axisLabel: {
-        interval: getInterval(),
+        interval: getInterval(data),
         rotate: 30,
         color: '#333333',
         fontSize: 12
@@ -90,7 +59,7 @@ function initChart(canvas, width, height, dpr) {
       }
     },
     series: [{
-      data: lowData,
+      data: data,
       name: 'number',
       type: 'line',
       smooth: false,
@@ -102,7 +71,21 @@ function initChart(canvas, width, height, dpr) {
       },
     }]
   };
-
+  chart.on("click", (event) => {
+    wx.navigateTo({
+      url: `../../pages/drill/index?time=${event.name}`,
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        someEvent: function(data) {
+          console.log(data)
+        }
+      },
+      success: function(res) {
+        // 通过 eventChannel 向被打开页面传送数据
+        res.eventChannel.emit('acceptShowData', { title: title })
+      }
+    })
+  });
   chart.setOption(option);
   return chart;
 }
@@ -110,7 +93,7 @@ function initChart(canvas, width, height, dpr) {
 Component({
   data: {
     ec: {
-      onInit: initChart
+      lazyLoad: true
     }
   },
   properties: {
@@ -118,12 +101,42 @@ Component({
       type: String,
       value: '',
       observer: function(val){
-        onTitle = val
+      }
+    },
+    dataChart: {
+      type: Array,
+      value: [],
+      observer: function(val){
+        let valueList = []
+        let dateList = []
+        val.forEach((item) => {
+          valueList.push(item.value)
+          dateList.push(item.date)
+        })
+        this.initLine(valueList, dateList, this.data.titleChart)
       }
     }
   },
-  methods: {},
+  methods: {
+    initLine:function(data, time, title){
+      let ecComponent = this.selectComponent('#mychart-dom-line');
+      ecComponent.init((canvas, width, height, dpr) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        //调用设定EChart报表状态的函数，并且把从后端拿到的数据传过去
+        setOption(chart, data, time, title);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
+      });
+    },
+  },
   onReady() {
-  }
+  },
+
 });
 

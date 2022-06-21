@@ -4,7 +4,7 @@
   height: 100%;
   font-size: 24rpx;
   color: #333333;
-  padding: 10px 16px;
+  /* padding-bottom: 10px; */
   background: #ffffff;
 }
 .flex_row,.tab_time, .tab_time_next{
@@ -16,23 +16,20 @@
   justify-content: space-between;
 }
 .tab_sticky{
-  height: 50rpx;
-  margin: 20rpx 0;
-  background: #f6f6f6;
+  padding: 20rpx 0;
+  background: #ffffff;
+  margin: 0 16px;
 }
 .tab_chart{
+  margin: 0 16px;
   background: #f6f6f6;
   border-radius: 4px;
 }
 .tab_time, .tab_time_next{
   height: 50rpx;
   line-height: 50rpx;
-}
-.tab_time{
-  margin: 15rpx 0;
-}
-.tab_time_next{
-  margin: 15rpx 16px;
+  background: #f6f6f6;
+  border-radius: 2px;
 }
 .time_text{
   min-width: 160rpx;
@@ -43,7 +40,7 @@
 .titleMax{
   font-size: 32rpx;
 }
-#line_times,#line_seccess,#line_efficiency_three,#line_efficiency_six{
+.barPart,.linePart,#line_efficiency_three,#line_efficiency_six{
   width: 48%;
   margin-top: 10px;
   background: rgb(228, 225, 225);

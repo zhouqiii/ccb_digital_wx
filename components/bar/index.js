@@ -1,9 +1,7 @@
 import * as echarts from '../../miniprogram_npm/ec-canvas/echarts';
 
-let chart = null;
-const payData = [18, 25, 10, 32, 15, 38];
-function getInterval() {
-  const len = payData.length
+function getInterval(data) {
+  const len = data.length
   const k = len%6
   if(k !== 0) {
     return Math.ceil(len/6)
@@ -11,18 +9,20 @@ function getInterval() {
     return (len/6 - 1)
   }
 }
-
-function initChart(canvas, width, height, dpr) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-
+function setOption(chart, data, time, title){
+  let itemStyle = {} //是否设置渐变色
+  if(title === '流水线日均执行峰值(次)'){
+    itemStyle = {
+      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: '#83bff6' },
+        { offset: 0.5, color: '#188df0' },
+        { offset: 1, color: '#188df0' }
+      ])
+    }
+  }
   var option = {
     title: {
-      text: '业务功能交付效率',
+      text: title,
       textStyle: {
         fontSize: 14,
         fontWeight: 'normal',
@@ -33,24 +33,6 @@ function initChart(canvas, width, height, dpr) {
     itemStyle: {
       color: '#0098e1'
     },
-    // tooltip: {
-    //   trigger: 'axis',
-    //   backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    //   color: 'rgba(0, 0, 0)',
-    //   borderWidth: '0',
-    //   textStyle: {
-    //     color: '#ffffff'
-    //   },
-    //   axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-    //     type: 'line',        // 默认为直线，可选为：'line' | 'shadow'
-    //     lineStyle: {
-    //       color: '#a6a6a6'
-    //     }
-    //   },
-    //   // formatter(params) {
-    //   //   return `<div>${params[0].name}: ${params[0].value}</div>`
-    //   // }
-    // },
     grid: {
       left: 20,
       right: 20,
@@ -71,7 +53,7 @@ function initChart(canvas, width, height, dpr) {
     xAxis: [
       {
         type: 'category',
-        data: ['2022年1月', '2022年2月', '2022年3月', '2022年4月', '2022年5月', '2022年6月'],
+        data: time,
         axisTick: {
           show: false
         },
@@ -81,7 +63,7 @@ function initChart(canvas, width, height, dpr) {
           }
         },
         axisLabel: {
-          interval: getInterval(),
+          interval: getInterval(time),
           rotate: 30,
           color: '#333333',
           fontSize: 12
@@ -104,7 +86,7 @@ function initChart(canvas, width, height, dpr) {
     ],
     series: [
       {
-        data: payData,
+        data: data,
         name: 'number',
         type: 'bar',
         barWidth: '35%',
@@ -114,31 +96,69 @@ function initChart(canvas, width, height, dpr) {
           color: '#333333',
           fontSize: 12
         },
-        // itemStyle: { // 是否设置渐变色
-        //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-        //     { offset: 0, color: '#83bff6' },
-        //     { offset: 0.5, color: '#188df0' },
-        //     { offset: 1, color: '#188df0' }
-        //   ])
-        // },
+        itemStyle: itemStyle // 是否设置渐变色
       }
     ]
   };
   chart.setOption(option);
   return chart;
 }
-
-Page({
+Component({
   data: {
     ec: {
-      onInit: initChart
+      lazyLoad: true
     }
   },
-  onReady() {
+  properties: {
+    titleChart: {
+      type: String,
+      value: '',
+      observer: function(val){
+      }
+    },
+    dataChart: {
+      type: Array,
+      value: [],
+      observer: function(val){
+        console.log(val, 'val')
+        let valueList = []
+        let dateList = []
+        val.forEach((item) => {
+          valueList.push(item.value)
+          dateList.push(item.date)
+        })
+        this.initLine(valueList, dateList, this.data.titleChart)
+      }
+    }
+  },
+  methods: {
+    initLine:function(data, time, title){
+      let ecComponent = this.selectComponent('#mychart-dom-bar');
+      ecComponent.init((canvas, width, height, dpr) => {
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: dpr // new
+        });
+        setOption(chart, data, time, title);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
+      });
+    },
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
     setTimeout(function () {
       // 获取 chart 实例的方式
-      // console.log(chart)
-    }, 2000);
-  }
+      console.log(chart, '111111111')
+    }, 1000);
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+  },
 });
 
