@@ -1,7 +1,7 @@
 /**index.wxss**/
 .tableTitle{
   text-align: center;
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: normal;
   color: '#333333';
   height: 36rpx;
@@ -9,30 +9,32 @@
   margin-bottom: 10rpx;
 }
 .tableView{
-  border:1px solid rgba(0, 204, 255, 0.2);
+  /* border:1px solid rgba(0, 204, 255, 0.2); */
   border-right:0;
   border-bottom: 0;
-  width: 98%;
-  margin-left: 1%;
+  width: 100%;
 }
 /* 表头 */
 .table_header{
-  display: flex;
-  justify-content: space-between; /* 项目位于各行之间留有空白的容器内。 */
-  background-color: rgba(0, 204, 255, 0.2);
-  width: 100%;
-  font-size: 28rpx;
-  color: #333333;
-  text-align: center;
+  background: #f6f6f6;
   font-weight: bold;
 } 
+/* 表格cell */
+.table_cell,.table_header{
+  display: flex;
+  justify-content: space-between; /* 项目位于各行之间留有空白的容器内。 */
+  width: 100%;
+  font-size: 24rpx;
+  color: #333333;
+  text-align: center;
+}
 .th{
   display: flex;
   align-items: center;
   justify-content: center;
   height: 70rpx;
-  border-bottom: 1px solid rgba(0, 204, 255, 0.2);
-  border-right: 1px solid rgba(0, 204, 255, 0.2);
+  /* border-bottom: 1px solid rgba(0, 204, 255, 0.2); */
+  /* border-right: 1px solid rgba(0, 204, 255, 0.2); */
 }
 .th1,.th2,.td1,.td2{
   width: 50%
@@ -49,21 +51,16 @@
   text-overflow: ellipsis;
   -o-text-overflow:ellipsis;
 } */
-/* 表格cell */
-.table_cell{
-  display: flex;
-  justify-content: space-between; /* 项目位于各行之间留有空白的容器内。 */
-  width: 100%;
-  font-size: 24rpx;
-  color: #333333;
-  text-align: center;
+
+.table_cell:nth-child(odd){
+  background: #f6f6f6;
 }
 .td{
   display: flex;
   align-items: center;
   justify-content: center;
   height: 60rpx;
-  border-bottom: 1px solid rgba(0, 204, 255, 0.2);
-  border-right: 1px solid rgba(0, 204, 255, 0.2);
+  /* border-bottom: 1px solid rgba(0, 204, 255, 0.2); */
+  /* border-right: 1px solid rgba(0, 204, 255, 0.2); */
 } 
 

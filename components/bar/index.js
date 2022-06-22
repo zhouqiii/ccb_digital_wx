@@ -90,6 +90,27 @@ function setOption(chart, data, time, title){
         name: 'number',
         type: 'bar',
         barWidth: '35%',
+        //设置平均值线
+        markLine:{
+          symbol:'none',//去掉箭头
+          silent: true,//图形是否不响应和触发鼠标事件,false即响应和触发鼠标事件
+          label: {
+            position: 'insideStartTop',
+            formatter: '{b}: {c}',
+          },
+          lineStyle: {
+            color: 'yellow',
+            width: 1,
+            type: 'solid',
+            cap: 'round'
+          },
+          data:[
+            {
+              type:"average",
+              name:"平均值"
+            }
+          ]
+        },
         label: {
           show: true,
           position: 'top',
@@ -100,6 +121,14 @@ function setOption(chart, data, time, title){
       }
     ]
   };
+  chart.on("click", (event) => {
+    wx.navigateTo({
+      url: `/pages/drill/index?time=${event.name}`,
+      success: function(res) {
+        res.eventChannel.emit('acceptShowData', { title })
+      }
+    })
+  });
   chart.setOption(option);
   return chart;
 }
@@ -152,7 +181,6 @@ Component({
   onReady: function () {
     setTimeout(function () {
       // 获取 chart 实例的方式
-      console.log(chart, '111111111')
     }, 1000);
   },
   /**

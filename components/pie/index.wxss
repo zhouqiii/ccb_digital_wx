@@ -1,7 +1,7 @@
 /**index.wxss**/
 .bar_title{
   text-align: center;
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: normal;
   color: '#333333';
   height: 36rpx;
@@ -37,6 +37,6 @@ ec-canvas {
 /*vant dialog样式定制*/
 .dialog-index--van-dialog__confirm{
   height: 30px !important;
-  font-size: 14px !important;
+  font-size: 28rpx !important;
   font-weight: normal !important;
 }

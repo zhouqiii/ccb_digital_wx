@@ -1,4 +1,9 @@
 <!--index.wxml-->
 <view>
-  <page-table title="{{title}}" data="{{listData}}" header="{{listHeader}}"></page-table>
+  <page-table
+    title="{{ title }}"
+    data="{{ listData }}"
+    cellText="{{ cellText }}"
+  >
+  </page-table>
 </view>

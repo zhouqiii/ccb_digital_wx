@@ -4,14 +4,21 @@ Component({
     onHeader: [],
     onData: [],
     onTitle: '',
+    ifSteps: false,
+    stepList: ['需求','设计', '开发', '评审', '投产'],
   },
   properties: {
     title: {
       type: String,
       value: '',
       observer: function(val){
+        let title = val
+        title = title.replace("(%)", "")
+        title = title.replace("(秒)", "")
+        title = title.replace("(次)", "")
+        title = title.replace("(日)", "")
         this.setData({
-          onTitle: val
+          onTitle: title,
         })
       }
     },
@@ -24,12 +31,19 @@ Component({
         })
       }
     },
-    header: {
-      type: Array,
-      value: [],
+    cellText: {
+      type: String,
+      value: '',
       observer: function(val){
+        let headerTitle = []
+        if(val === '需求变更率'){
+          headerTitle = ['序号', '企业级项目名称', '变更需求数', '计划投产需求数', val]
+        }else{
+          headerTitle = ['序号', '企业级项目名称', val]
+        }
         this.setData({
-          onHeader: val
+          onHeader: headerTitle,
+          ifSteps: val === '需求各阶段时长(日)'
         })
       }
     }
@@ -38,7 +52,6 @@ Component({
     
   },
   onLoad: function(option){
-    console.log(option.query)
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('acceptDataFromOpenedPage', {data: 'test'});
     eventChannel.emit('someEvent', {data: 'test'});

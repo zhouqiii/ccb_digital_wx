@@ -4,10 +4,9 @@
   height: 100%;
   font-size: 24rpx;
   color: #333333;
-  /* padding-bottom: 10px; */
-  background: #ffffff;
+  background: #f6f6f6;
 }
-.flex_row,.tab_time, .tab_time_next{
+.flex_row,.tab_time_next{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,20 +15,30 @@
   justify-content: space-between;
 }
 .tab_sticky{
-  padding: 20rpx 0;
-  background: #ffffff;
   margin: 0 16px;
 }
+
 .tab_chart{
-  margin: 0 16px;
-  background: #f6f6f6;
-  border-radius: 4px;
+  margin: 0 16px 16px 16px;
+  padding: 20rpx;
+  background: #ffffff;
+  border-radius: 5rpx;
+  box-shadow: 2px 2px 2px #f3f3f3;
+  
 }
 .tab_time, .tab_time_next{
+  background: #f6f6f6;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+  
+}
+.timebox{
   height: 50rpx;
   line-height: 50rpx;
-  background: #f6f6f6;
-  border-radius: 2px;
+  padding: 20rpx 20rpx;
+  box-shadow: 2px 2px 2px #f3f3f3;
+  border-radius: 5rpx;
+  background: #ffffff;
 }
 .time_text{
   min-width: 160rpx;
@@ -38,30 +47,29 @@
   margin: 0 20rpx;
 }
 .titleMax{
-  font-size: 32rpx;
+  font-size: 28rpx;
+  font-weight: bolder;
 }
 .barPart,.linePart,#line_efficiency_three,#line_efficiency_six{
   width: 48%;
   margin-top: 10px;
-  background: rgb(228, 225, 225);
-  border: 1px solid rgb(228, 225, 225);
-  border-radius: 10px;
+  box-shadow: 2px 2px 20px #f3f3f3;
+  border-radius: 5rpx;
 }
 .marTop{
-  margin-top: 10px;
-  background: rgb(228, 225, 225);
-  border: 1px solid rgb(228, 225, 225);
-  border-radius: 10px;
+  margin-top: 20rpx;
+  border-radius: 5rpx;
+  box-shadow: 2px 2px 20px #f3f3f3;
 }
 /*时间组件主题修改开始*/
 .van-cell{
   padding: 0 !important;
   height: 50rpx;
   line-height: 50rpx;
-  background: rgba(0, 204, 255, 0.2) !important;
+  /* background: rgba(0, 204, 255, 0.2) !important; */
 }
 .van-field__control{
-  font-size:24rpx;
+  font-size: 28rpx;
   color: #333333;
   text-align: center !important;
 
@@ -69,6 +77,6 @@
 .van-cell__right-icon-wrap{
   color: #333333 !important;
   margin-left: 20rpx;
-  font-size: 12px !important;
+  font-size: 28rpx !important;
 }
 /*时间组件主题修改结束*/

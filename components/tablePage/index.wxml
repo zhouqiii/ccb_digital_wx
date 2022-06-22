@@ -1,19 +1,54 @@
 <!--index.wxml-->
 <view class="table_page">
   <view class="tableTitle">{{onTitle}}</view>
-  <view class="tableView">
+  <view class="tableView" wx:if="{{ !ifSteps }}">
     <view class="table_header">
-      <block wx:for="{{ onHeader }}" wx:for-item="header" wx:key="key">
-        <view class="th th1">{{ header }}</view>
+      <block wx:for="{{ onHeader }}" wx:for-item="header" wx:for-index="idx" wx:key="key">
+        <view class="th {{ onHeader.length > 3 ? 'wid10p' : 'wid20p' }}" wx:if="{{ idx === 0 }}">{{ header }}</view>
+        <view class="th {{ onHeader.length > 3 ? 'wid22p' : 'wid30p' }}" wx:if="{{ idx === 1 }}">{{ header }}</view>
+        <view class="th {{ onHeader.length > 3 ? 'wid22p' : 'wid50p' }}" wx:if="{{ idx > 1 }}">{{ header }}</view>
       </block>
     </view>
-    <scroll-view scroll-y="true">
-      <block wx:for="{{ onData }}" wx:for-item="work" wx:key="key">
+    <view>
+      <block wx:for="{{ onData }}" wx:for-item="work" wx:for-index="idx" wx:key="key">
         <view class="table_cell">
-          <view class="td td1">{{work.name}}</view>
-          <view class="td td2">{{work.times}}</view>
+          <view class="td {{ onHeader.length > 3 ? 'wid10p' : 'wid20p' }}" >{{ idx+1 }}</view>
+          <view class="td {{ onHeader.length > 3 ? 'wid22p' : 'wid30p' }}">{{work.name}}</view>
+          <!--num和request属性存在表示这是需求变更率表格-->
+          <view class="td wid22p" wx:if="{{ cellText === '需求变更率' }}">{{work.num}}</view>
+          <view class="td wid22p" wx:if="{{ cellText === '需求变更率' }}">{{work.request}}</view>
+          <view class="td {{ onHeader.length > 3 ? 'wid22p' : 'wid50p' }}">{{work.times}}</view>
         </view>
       </block>
-    </scroll-view>
+    </view>
+  </view>
+  <view class="tableView" wx:if="{{ ifSteps }}">
+    <view class="table_header">
+      <view class="th wid20p">序号</view>
+      <view class="th wid30p">企业级项目名称</view>
+      <view class="thCplex wid50p">
+        <view class="tr borBtm">需求各阶段时长(日)</view>
+        <view class="tr flex-col">
+          <text wx:for="{{ stepList }}" wx:for-item="step" wx:for-index="idx" wx:key="key" class="wid20p {{ idx < 4 ? 'borRgt' : '' }}">{{ step }}</text>
+        </view>
+      </view>
+    </view>
+    <view>
+      <block wx:for="{{ onData }}" wx:for-item="work" wx:for-index="idx" wx:key="key">
+        <view class="table_cell">
+          <view class="td wid20p" >{{ idx+1 }}</view>
+          <view class="td wid30p">{{work.name}}</view>
+          <view class="td wid50p">
+            <view
+              wx:for="{{ work.list }}"
+              wx:for-item="step"
+              wx:for-index="idx"
+              wx:key="key"
+              class="wid20p hgt60 {{ idx < 4 ? 'borRgt' : '' }}"
+            >{{ step }}</view>
+          </view>
+        </view>
+      </block>
+    </view>
   </view>
 </view>

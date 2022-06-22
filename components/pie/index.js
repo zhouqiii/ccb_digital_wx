@@ -18,7 +18,6 @@ function getData(list) {
 }
 function setOption(chart, data){
   var option = {
-    backgroundColor: "rgb(228, 225, 225)",
     tooltip: {
       trigger: 'item',
       backgroundColor: 'rgba(0, 0, 0, 0.5)',

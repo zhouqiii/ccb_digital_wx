@@ -209,26 +209,29 @@ page, .container {
 /*vant样式定制开始*/
 /*tab栏主题修改开始*/
 .van-tabs__nav{
-  margin: 0 16px;
+  margin: 0;
 }
+.van-tabs__nav .van-tab :nth-of-type(1) { 
+  box-shadow: 2px 0px 2px #f6f6f6 inset;
+ }
 .van-tab {
   padding: 0px !important;
-  font-size: 32rpx !important;
+  font-size: 28rpx !important;
   color: #333333 !important;
-  background: #f6f6f6;
-}
-.van-tab--active {
-  color: #333333 !important;
+  background: #ffffff;
   font-weight: bolder !important;
 }
+.van-tab--active {
+  color: #005CF1 !important;
+}
 .van-tab--active .van-ellipsis{
-  background: #f6f6f6;
-  margin: 0 16px !important;
+  /* background: #f6f6f6; */
+  margin: 0 !important;
 }
 .van-tabs__line{
-  width: 40% !important;
-  right: 5% !important;
-  background-color: yellowgreen !important
+  width: 50% !important;
+  right: 0 !important;
+  background-color: #005CF1 !important
 }
 /*tab栏主题修改结束*/
 

@@ -1,23 +1,25 @@
 <view class="platform">
   <van-tabs sticky bind:change="onChange">
     <van-tab title="敏捷研发">
-      <van-sticky offset-top="{{ 43 }}">
+      <van-sticky offset-top="{{ 44 }}">
         <view class="tab_sticky">
           <view class="tab_time">
-            <text class="time_text">年月区间</text>
-            <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
-            <!-- <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' /> -->
-            <text class="time_line">—</text>
-            <van-field value="{{ endDate }}" bindtap="showEndPop" placeholder="请选择结束日期" is-link readonly/>
-            <!-- <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' /> -->
+            <view class="timebox flex_row">
+              <text class="time_text">年月区间</text>
+              <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
+              <!-- <input bindtap="showStartPop" placeholder="请选择起始日期" value='{{startDate}}' /> -->
+              <text class="time_line">—</text>
+              <van-field value="{{ endDate }}" bindtap="showEndPop" placeholder="请选择结束日期" is-link readonly/>
+              <!-- <input bindtap="showEndPop" placeholder="请选择结束日期" value='{{endDate}}' /> -->
+            </view>
           </view>
         </view>
       </van-sticky>
-      <scroll-view style="height: 100%"  bindscroll="touchclose" scroll-with-animation="true" scroll-top="{{ scrollTopFir }}">
+      <scroll-view style="height: 100%" bindscroll="touchclose" scroll-with-animation="true" scroll-top="{{ scrollTopFir }}">
         <view class="tab_chart">
           <text class="titleMax">一、敏捷交付能力</text>
           <view class="marTop">
-            <chart-bar titleChart="敏捷交付能力" dataChart="{{ payFuncList }}"></chart-bar>
+            <chart-bar titleChart="业务功能交付效率" dataChart="{{ payFuncList }}"></chart-bar>
           </view>
           <view class="marTop">
             <chart-line titleChart="需求变更率" dataChart="{{ changeRateList }}"></chart-line>
@@ -29,7 +31,7 @@
         <view class="tab_chart">
           <text class="titleMax">二、敏捷交付速率</text>
           <view class="marTop">
-            <chart-multi-bar titleChart="需求各阶段时长" dataChart="{{ demandTimeList }}"></chart-multi-bar>
+            <chart-multi-bar titleChart="需求各阶段时长(日)" dataChart="{{ demandTimeList }}"></chart-multi-bar>
           </view>
           <view class="marTop">
             <chart-pie dataChart="{{ stepTimeRate }}"></chart-pie>
@@ -41,13 +43,15 @@
       </scroll-view>
     </van-tab>
     <van-tab title="持续交付">
-      <van-sticky offset-top="{{ 43 }}">
+      <van-sticky offset-top="{{ 44 }}">
         <view class="tab_sticky">
           <view class="tab_time">
-            <text class="time_text">年月区间</text>
-            <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
-            <text class="time_line">—</text>
-            <van-field value="{{ endDate }}" bindtap="showEndPop" placeholder="请选择结束日期" is-link readonly/>
+            <view class="timebox flex_row">
+              <text class="time_text">年月区间</text>
+              <van-field value="{{ startDate }}" bindtap="showStartPop" placeholder="请选择起始日期" is-link readonly/>
+              <text class="time_line">—</text>
+              <van-field value="{{ endDate }}" bindtap="showEndPop" placeholder="请选择结束日期" is-link readonly/>
+            </view>
           </view>
         </view>
       </van-sticky>

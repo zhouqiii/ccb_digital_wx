@@ -111,6 +111,14 @@ function setOption(chart, data, time, title){
     ],
     series: data
   };
+  chart.on("click", (event) => {
+    wx.navigateTo({
+      url: `/pages/drill/index?time=${event.name}`,
+      success: function(res) {
+        res.eventChannel.emit('acceptShowData', { title })
+      }
+    })
+  });
   chart.setOption(option);
   return chart;
 }
