@@ -1,0 +1,20 @@
+<template name="header">
+  <van-nav-bar
+    title="header"
+    left-text="back"
+    left-arrow
+    bind:click-left="onClickLeft"
+  >
+    <van-icon name="search" slot="right" />
+  </van-nav-bar>
+</template>
+<view>
+  <van-nav-bar
+    title="{{name}}"
+    left-text="back"
+    left-arrow
+    bind:click-left="onClickLeft"
+  >
+    <van-icon name="search" slot="right" />
+  </van-nav-bar>
+</view>

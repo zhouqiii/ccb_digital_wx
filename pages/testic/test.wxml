@@ -1,0 +1,8 @@
+<include src="../../template/template"/>
+<scroll-view scroll-y="true" style="height: 200rpx" scroll-into-view="{{toTop}}">
+  <view id="texst">
+    <block wx:for="{{goodsNumber}}" wx:for-item="num" wx:key="key" wx:for-index="key">
+      <view bindtap="toTheTop">{{num}}-{{key}}</view>
+    </block>
+  </view>
+</scroll-view>

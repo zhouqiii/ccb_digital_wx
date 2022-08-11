@@ -1,0 +1,4 @@
+<import src="../../template/template"/>
+<view>
+  <template is="header" data="{{name, age}}"></template>
+</view>
